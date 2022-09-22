@@ -1,0 +1,23 @@
+---
+import SimpleLayout from '../layouts/SimpleLayout.astro'
+import ContactAddress from '../components/contact/ContactAddress.vue'
+import ContactForm from '../components/contact/ContactForm.vue'
+---
+
+<SimpleLayout>
+  <main class="contacts">
+    <ContactAddress />
+    <ContactForm client:load />
+  </main>
+</SimpleLayout>
+
+<style>
+.contacts {
+  display: flex;
+  padding: 10em 0 0;
+  clear: both;
+  position: relative;
+  height: 85vh;
+  justify-content: space-between;
+}
+</style>

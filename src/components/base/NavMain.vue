@@ -1,0 +1,112 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useStore } from '@nanostores/vue'
+import { isMenuOpen } from '@/stores/MenuStore'
+
+const $isMenuOpen = useStore(isMenuOpen)
+
+const body = ref<HTMLElement | null>(null)
+const header = ref<HTMLElement | null>(null)
+
+const toggleMenu = () => {
+  body.value = document.body
+  header.value = document.querySelector('.header')
+  body?.value.classList.toggle('menu-is-open')
+  header?.value.classList.toggle('is-open')
+}
+</script>
+
+<template>
+  <nav
+    @click=";[toggleMenu(), isMenuOpen.set(!$isMenuOpen)]"
+    :class="[
+      'main-menu',
+      {
+        'main-menu--open': $isMenuOpen
+      }
+    ]"
+    role="navigation"
+  >
+    <span class="main-menu__icon">
+      <i class="icon-close"></i>
+    </span>
+    <div class="main-menu__wrapper">
+      <ul class="main-menu__content">
+        <li class="main-menu__item">
+          <a class="main-menu__link" href="/">Home</a>
+        </li>
+        <li class="main-menu__item">
+          <a class="main-menu__link" href="/contacts">Contacts</a>
+        </li>
+        <li class="main-menu__item">
+          <a class="main-menu__link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+
+<style lang="scss">
+@import '@/assets/scss/_variables.scss';
+@import '@/assets/scss/_mixins.scss';
+
+$menu-width: 80%;
+$menu-max-width: 360px;
+$menu-z-index: 1002;
+$menu-padding: 4em 40px 40px;
+$menu-icon-top-position: 34px;
+$menu-icon-right-position: 16px;
+$menu-content-margin: 0 0 3em;
+$menu-link-font-size: 0.9rem;
+$menu-link-padding: 10px 0;
+
+.main-menu {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: $menu-padding;
+  max-width: $menu-max-width;
+  width: $menu-width;
+  height: 100%;
+  background: $brand-white;
+  z-index: $menu-z-index;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &--open {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &__icon {
+    position: absolute;
+    right: $menu-icon-right-position;
+    top: $menu-icon-top-position;
+    cursor: pointer;
+  }
+
+  &__content {
+    padding: 0;
+    margin: $menu-content-margin;
+  }
+
+  &__item {
+    @include unstyled-list;
+    text-align: left;
+  }
+
+  &__link {
+    display: block;
+    color: $brand-black;
+    font-size: $menu-link-font-size;
+    padding: $menu-link-padding;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}
+</style>

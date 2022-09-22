@@ -1,0 +1,23 @@
+$progress-bar-height: 4px;
+$spinner-left-position: 50%;
+$spinner-icon-size: 50px;
+
+#nprogress .bar {
+  background: $brand-black;
+  height: $progress-bar-height;
+}
+
+#nprogress .spinner {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  position: absolute;
+  left: $spinner-left-position;
+}
+
+#nprogress .spinner-icon {
+  width: $spinner-icon-size;
+  height: $spinner-icon-size;
+  border-top-color: $brand-black;
+  border-left-color: $brand-black;
+}
