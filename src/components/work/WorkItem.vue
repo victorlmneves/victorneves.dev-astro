@@ -51,7 +51,7 @@ onMounted(() => {
     if ('IntersectionObserver' in window) {
       setTimeout(() => {
         const imageObserver = new IntersectionObserver((entries, _observer) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const image = entry.target
               image.classList.remove('js-lazy')
@@ -115,10 +115,12 @@ onMounted(() => {
       <div class="work-list__content-wrapper">
         <div class="work-list__content">
           <h2 class="work-list__title">
-            <a :href="item.slug">{{ item.client }}</a>
+            <a :href="`work/${item.slug}`">{{ item.client }}</a>
           </h2>
           <p class="work-list__info">{{ item.project }}</p>
-          <a class="work-list__link" :href="item.slug">View Project</a>
+          <a class="work-list__link" :href="`work/${item.slug}`">
+            View Project
+          </a>
         </div>
       </div>
       <div class="work-list__wrapper-img">
