@@ -6,17 +6,17 @@ export async function getStaticPaths() {
   const baseUrl = 'https://api.victorneves.dev'
   const response = await fetch(`${baseUrl}/works/read.php`).then(r => r.json())
 
-  return response.map(({ slug, client, image }) => {
+  return response.map(({ slug, client, project, image }) => {
     return {
       params: { slug },
-      props: { slug, client, image, response }
+      props: { slug, client, image, project, response }
     };
   });
 }
 
-const { slug, client, image, response } = Astro.props;
+const { slug, client, image, project, response } = Astro.props;
 ---
 
-<DetailsLayout>
+<DetailsLayout client={client} project={project}>
   <WorkDetail client:idle />
 </DetailsLayout>

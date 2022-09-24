@@ -8,6 +8,9 @@ import NavMain from '../components/base/NavMain.vue'
 import Header from '../components/base/Header.vue'
 
 import '../assets/scss/main/_fonts.scss'
+
+const client = Astro.props.client
+const project = Astro.props.project
 ---
 
 <html lang='en'>
@@ -16,7 +19,7 @@ import '../assets/scss/main/_fonts.scss'
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--[if IE]><link rel="icon" href="/favicon.ico"><![endif]-->
-    <title>Victor Neves | Frontend Developer</title>
+    <title>Victor Neves | Frontend Developer - {client} | {project}</title>
     <meta name="description" content="Victor Neves - Senior creative developer" />
     <meta property="og:site_name" content="Victor Neves - Senior creative developer" />
     <meta property="og:type" content="website" />
