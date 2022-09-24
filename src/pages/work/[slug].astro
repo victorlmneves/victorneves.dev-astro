@@ -1,0 +1,22 @@
+---
+import DetailsLayout from '../../layouts/DetailsLayout.astro'
+import WorkDetail from '../../components/work/WorkDetail.vue'
+
+export async function getStaticPaths() {
+  const baseUrl = 'https://api.victorneves.dev'
+  const response = await fetch(`${baseUrl}/works/read.php`).then(r => r.json())
+
+  return response.map(({ slug, client, image }) => {
+    return {
+      params: { slug },
+      props: { slug, client, image, response }
+    };
+  });
+}
+
+const { slug, client, image, response } = Astro.props;
+---
+
+<DetailsLayout>
+  <WorkDetail client:idle />
+</DetailsLayout>

@@ -1,0 +1,193 @@
+---
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+// import { createPinia } from 'pinia'
+// createPinia()
+
+import NavMain from '../components/base/NavMain.vue'
+import Header from '../components/base/Header.vue'
+
+import '../assets/scss/main/_fonts.scss'
+---
+
+<html lang='en'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!--[if IE]><link rel="icon" href="/favicon.ico"><![endif]-->
+    <title>Victor Neves | Frontend Developer</title>
+    <meta name="description" content="Victor Neves - Senior creative developer" />
+    <meta property="og:site_name" content="Victor Neves - Senior creative developer" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.victorneves.dev" />
+    <meta property="og:title" content="Victor Neves - Senior creative developer" />
+    <meta property="og:description" content="Senior creative developer based in Portugal" />
+    <meta property="og:image" content="https://www.victorneves.dev/img/me.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Victor Neves - Senior creative developer" />
+    <meta name="twitter:description" content="Senior creative developer based in Portugal" />
+    <meta name="twitter:image" content="https://www.victorneves.dev/img/me.jpg" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="https://www.google-analytics.com" rel="preconnect" />
+    <script async="" src="https://www.google-analytics.com/analytics.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="app">
+      <div class="container container--full">
+        <main>
+          <NavMain client:load />
+          <Header client:load />
+          <slot />
+          <!-- your content is injected here -->  
+        </main>
+      </div>
+    </div>
+	</body>
+</html>
+
+<style is:global lang="scss">
+@import '@/assets/scss/_variables.scss';
+@import '@/assets/scss/_mixins.scss';
+
+$body-margin: 0;
+$menu-open-overflow: hidden;
+$menu-open-display: flex;
+$menu-open-position: absolute;
+$menu-open-z-index: 2;
+$menu-open-bg-color: rgba(0, 0, 0, 0.5);
+$container-padding: 0;
+$container-width-tablet: 740px;
+$container-width-laptop: 960px;
+$container-width-desktop: 1140px;
+$nav-padding: 30px;
+$nav-link-font-weight: 500;
+$nav-link-color: #2c3e50;
+$nav-link-active-color: #42b983;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $brand-white;
+  color: lighten($brand-black, 50%);
+  font-family: $font-primary;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  margin: 0;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.menu-is-open {
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+  }
+
+  &.menu-show {
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: $brand-primary;
+  @include transition(0.5s);
+
+  &:hover {
+      color: $brand-lighter;
+  }
+
+  &:focus,
+  &:active {
+      outline: none;
+  }
+}
+
+::-webkit-selection {
+  color: $brand-body-color;
+  background: $brand-selection-color;
+}
+
+::-moz-selection {
+  color: $brand-body-color;
+  background: $brand-selection-color;
+}
+
+::selection {
+  color: $brand-body-color;
+  background: $brand-selection-color;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.is-visible {
+  display: block !important;
+}
+
+#app {
+  & .menu-is-open {
+    overflow: $menu-open-overflow;
+    height: 100%;
+    width: 100%;
+    display: $menu-open-display;
+    position: $menu-open-position;
+    top: 0;
+    left: 0;
+    z-index: $menu-open-z-index;
+    background: $menu-open-bg-color;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: $container-padding;
+
+  @include tablet {
+  width: $container-width-tablet;
+  }
+
+  @include laptop {
+  width: $container-width-laptop;
+  }
+
+  @include desktop {
+  width: $container-width-desktop;
+  }
+
+  &--full {
+    width: 100vw;
+
+    & .header {
+      background: none;
+    }
+  }
+}
+
+#nav {
+  padding: $nav-padding;
+
+  a {
+    font-weight: $nav-link-font-weight;
+    color: $nav-link-color;
+
+    &.router-link-exact-active {
+      color: $nav-link-active-color;
+    }
+  }
+}
+</style>
+    
